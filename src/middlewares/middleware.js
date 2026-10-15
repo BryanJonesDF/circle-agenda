@@ -8,10 +8,12 @@ exports.outroMiddleware = (req, res, next) => {
 }
 
 exports.checkCsrfError = (err, req, res, next) => {
-  if (err && "EBADCSRFTOKEN" === err.code) {
-    return res.render("404")
+  if (err) {
+    console.log(err); // você vê o erro no terminal
+    return res.render('404'); // o usuário vê a página 404
   }
-}
+  next();
+};
 
 exports.csrfMiddleware = (req, res, next) => {
   res.locals.csrfToken = req.csrfToken()
