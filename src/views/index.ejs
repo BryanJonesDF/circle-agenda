@@ -1,4 +1,5 @@
-<%- include('includes/head') %> <%- include('includes/nav') %>
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
 
 <div class="container">
   <div class="row">
@@ -7,19 +8,33 @@
     <div class="col-lg-8 my-3">
       <h1 class="text-center">Agenda</h1>
       <p class="text-center lead">Seus contatos estão abaixo.</p>
-
       <%- include('includes/messages') %>
 
-      <div class="table-responsive mt-3">
-        <table class="table">
-          <tr>
-            <td>Luiz</td>
-            <td>Otávio</td>
-            <td>(51) 99999-9999</td>
-            <td>luiz@email.com</td>
-          </tr>
-        </table>
-      </div>
+      <% if (contatos.length > 0) { %>
+        <div class="table-responsive mt-3">
+          <table class="table">
+            <% contatos.forEach(contato => { %>
+              <tr>
+                <td><%= contato.nome %></td>
+                <td><%= contato.sobrenome %></td>
+                <td><%= contato.email %></td>
+                <td><%= contato.telefone %></td>
+                <td>
+                  <a href="/contato/index/<%= contato._id %>">Editar</a>
+                </td>
+                <td>
+                  <form action="/contato/delete/<%= contato._id %>" method="POST" class="d-inline">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="btn btn-link text-danger p-0">Excluir</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </table>
+        </div>
+      <% } else { %>
+        <p class="text-center lead mt-3">Não existem contatos na sua agenda.</p>
+      <% } %>
     </div>
 
     <div class="col-lg-2"></div>

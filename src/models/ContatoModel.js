@@ -18,27 +18,39 @@ class Contato {
     this.contato = null;
   }
 
+  // ===== Métodos estáticos (não usam this, são chamados direto na classe) =====
+
   static async buscaPorId(id) {
-    if (typeof id !== 'string') return null;
+    if (typeof id !== 'string') return;
     const contato = await ContatoModel.findById(id);
     return contato;
   }
 
+  static async buscaContatos() {
+    const contatos = await ContatoModel.find().sort({ criadoEm: -1 });
+    return contatos;
+  }
+
+  static async delete(id) {
+    if (typeof id !== 'string') return;
+    const contato = await ContatoModel.findOneAndDelete({ _id: id });
+    return contato;
+  }
+
+  // ===== Métodos de instância (usam this.body e this.errors) =====
+
   async register() {
     this.valida();
     if (this.errors.length > 0) return;
-
     this.contato = await ContatoModel.create(this.body);
   }
 
-async edit(id) {
+  async edit(id) {
     if (typeof id !== 'string') return;
-    
     this.valida();
     if (this.errors.length > 0) return;
-
-    this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true })
-}
+    this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
+  }
 
   valida() {
     this.cleanUp();
@@ -47,9 +59,7 @@ async edit(id) {
       this.errors.push('E-mail inválido.');
     }
 
-    if (!this.body.nome) {
-      this.errors.push('Nome é um campo obrigatório.');
-    }
+    if (!this.body.nome) this.errors.push('Nome é um campo obrigatório.');
 
     if (!this.body.email && !this.body.telefone) {
       this.errors.push('Pelo menos um contato precisa ser enviado: e-mail ou telefone.');
