@@ -1,6 +1,11 @@
-import "core-js/stable"
-import "regenerator-runtime/runtime"
+import './assets/css/style.css';
+import Login from './modules/Login';
+import Contato from './modules/Contato';
 
-import "./assets/css/style.css"
+const cadastro = new Login('.form-cadastro');
+const login = new Login('.form-login');
+const contato = new Contato('.form-contato');
 
-console.log("Olá mundo 3")
+cadastro.init();
+login.init();
+contato.init();

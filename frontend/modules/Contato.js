@@ -1,0 +1,58 @@
+import validator from 'validator';
+
+export default class Contato {
+  constructor(formClass) {
+    this.form = document.querySelector(formClass);
+  }
+
+  init() {
+    this.events();
+  }
+
+  events() {
+    if (!this.form) return;
+    this.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.validate();
+    });
+  }
+
+  validate() {
+    const nomeInput = this.form.querySelector('input[name="nome"]');
+    const emailInput = this.form.querySelector('input[name="email"]');
+    const telefoneInput = this.form.querySelector('input[name="telefone"]');
+    let error = false;
+
+    this.limpaErros();
+
+    if (!nomeInput.value) {
+      this.criaErro(nomeInput, 'Nome é um campo obrigatório.');
+      error = true;
+    }
+
+    if (emailInput.value && !validator.isEmail(emailInput.value)) {
+      this.criaErro(emailInput, 'E-mail inválido.');
+      error = true;
+    }
+
+    if (!emailInput.value && !telefoneInput.value) {
+      this.criaErro(telefoneInput, 'Preencha pelo menos o e-mail ou o telefone.');
+      error = true;
+    }
+
+    if (!error) this.form.submit();
+  }
+
+  criaErro(input, msg) {
+    input.classList.add('is-invalid');
+    const div = document.createElement('div');
+    div.classList.add('invalid-feedback');
+    div.innerText = msg;
+    input.insertAdjacentElement('afterend', div);
+  }
+
+  limpaErros() {
+    this.form.querySelectorAll('.invalid-feedback').forEach((div) => div.remove());
+    this.form.querySelectorAll('.is-invalid').forEach((input) => input.classList.remove('is-invalid'));
+  }
+}

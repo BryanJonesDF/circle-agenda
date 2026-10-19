@@ -18,7 +18,7 @@
           <h2>Criar conta</h2>
           <p>Se você ainda não tem conta, preencha o formulário abaixo.</p>
 
-          <form action="/login/register" method="POST">
+          <form action="/login/register" method="POST" class="form-cadastro" novalidate>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
             <div class="mb-3">
@@ -40,7 +40,7 @@
           <h2>Entrar</h2>
           <p>Se você já tem uma conta, faça login abaixo.</p>
 
-          <form action="/login/login" method="POST">
+          <form action="/login/login" method="POST" class="form-login" novalidate>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
             <div class="mb-3">
