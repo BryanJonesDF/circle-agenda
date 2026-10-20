@@ -1,16 +1,13 @@
-<%- include('includes/head') %> <%- include('includes/nav') %>
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-2"></div>
-
-    <div class="col-lg-8 my-5">
-      <h1 class="display-1 text-center">Erro 404</h1>
-      <p class="text-center lead">A página que você procura não existe.</p>
-    </div>
-
-    <div class="col-lg-2"></div>
+<main class="container py-5">
+  <div class="app-card text-center py-5 app-narrow mx-auto">
+    <p class="app-404">404</p>
+    <h1 class="app-card-title">Página não encontrada</h1>
+    <p class="app-muted mb-4">O que você procura não existe ou você não tem acesso a isso.</p>
+    <a href="/" class="btn btn-accent">Voltar ao início</a>
   </div>
-</div>
+</main>
 
 <%- include('includes/footer') %>

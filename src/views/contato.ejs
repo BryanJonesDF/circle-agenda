@@ -1,48 +1,46 @@
 <%- include('includes/head') %>
 <%- include('includes/nav') %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-2"></div>
+<main class="container py-5">
+  <div class="app-narrow mx-auto">
+    <%- include('includes/messages') %>
 
-    <div class="col-lg-8 my-3">
-      <h1 class="text-center">Contato</h1>
-      <p class="text-center lead">Preencha os dados do contato abaixo.</p>
-      <%- include('includes/messages') %>
+    <a href="/" class="app-back">← Voltar para meus contatos</a>
 
-      <% if (contato._id) { %>
-        <form action="/contato/edit/<%= contato._id %>" method="POST" class="form-contato" novalidate>
-      <% } else { %>
-        <form action="/contato/register" method="POST" class="form-contato" novalidate>
-      <% } %>
+    <div class="app-card">
+      <h1 class="app-card-title"><%= contato._id ? 'Editar contato' : 'Novo contato' %></h1>
+      <p class="app-muted mb-4">Nome é obrigatório. Informe também e-mail ou telefone.</p>
+
+      <form action="<%= contato._id ? `/contato/edit/${contato._id}` : '/contato/register' %>" method="POST" class="form-contato" novalidate>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-        <div class="mb-3">
-          <label class="form-label">Nome</label>
-          <input type="text" name="nome" class="form-control" value="<%= contato.nome %>">
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" id="nome" name="nome" class="form-control" value="<%= contato.nome %>">
+          </div>
+          <div class="col-md-6">
+            <label for="sobrenome" class="form-label">Sobrenome</label>
+            <input type="text" id="sobrenome" name="sobrenome" class="form-control" value="<%= contato.sobrenome %>">
+          </div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Sobrenome</label>
-          <input type="text" name="sobrenome" class="form-control" value="<%= contato.sobrenome %>">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" id="email" name="email" class="form-control" value="<%= contato.email %>">
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">E-mail</label>
-          <input type="email" name="email" class="form-control" value="<%= contato.email %>">
+        <div class="mb-4">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input type="text" id="telefone" name="telefone" class="form-control" value="<%= contato.telefone %>">
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">Telefone</label>
-          <input type="text" name="telefone" class="form-control" value="<%= contato.telefone %>">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="submit" class="btn btn-accent w-100">
+          <%= contato._id ? 'Salvar alterações' : 'Cadastrar contato' %>
+        </button>
       </form>
     </div>
-
-    <div class="col-lg-2"></div>
   </div>
-</div>
+</main>
 
 <%- include('includes/footer') %>
