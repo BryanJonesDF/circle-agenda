@@ -1,4 +1,8 @@
-# Agenda de Contatos
+# Circle
+
+**Acesse:** https://SEU-LINK.onrender.com
+
+>Hospedado no plano gratuito do Render: o primeiro acesso pode levar até 1 minuto para carregar.
 
 Aplicação web full-stack para cadastro e gerenciamento de contatos, com autenticação de usuários. Cada usuário tem sua própria agenda privada.
 
@@ -105,8 +109,8 @@ Desenvolvida com **Node.js, Express e MongoDB**, seguindo o padrão **MVC**.
 
 ## Próximos passos
 
-- [ ] Design próprio
-- [ ] Deploy
+- [x] Design próprio
+- [x] Deploy
 - [ ] Busca de contatos por nome
 
 ---
