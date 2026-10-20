@@ -61,9 +61,10 @@ app.use(checkCsrfError)
 app.use(csrfMiddleware)
 app.use(routes)
 
-app.on("pronto", () => {
-  app.listen(3000, () => {
-    console.log("Acessar http://localhost:3000")
-    console.log("Servidor executando na porta 3000")
-  })
-})
+app.on('pronto', () => {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Acessar http://localhost:${PORT}`);
+    console.log(`Servidor executando na porta ${PORT}`);
+  });
+});
