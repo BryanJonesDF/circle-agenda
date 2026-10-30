@@ -5,9 +5,10 @@
   <div class="app-narrow mx-auto">
     <%- include('includes/messages') %>
 
-    <div class="app-card text-center py-5">
-      <h1 class="app-title">Olá! 👋</h1>
-      <p class="app-muted mb-4">Você está logado como <strong><%= user.email %></strong>.</p>
+    <div class="app-panel text-center py-5">
+      <span class="app-avatar app-avatar-lg cor-<%= user.email.charCodeAt(0) % 6 %> mb-3"><%= user.email.charAt(0).toUpperCase() %></span>
+      <h1 class="app-title">Olá!</h1>
+      <p class="app-muted mb-4">Você entrou como <strong><%= user.email %></strong>.</p>
       <a href="/" class="btn btn-accent">Ver meus contatos</a>
     </div>
   </div>

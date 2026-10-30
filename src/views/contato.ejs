@@ -5,11 +5,20 @@
   <div class="app-narrow mx-auto">
     <%- include('includes/messages') %>
 
-    <a href="/" class="app-back">← Voltar para meus contatos</a>
+    <a href="/" class="app-back">Voltar para meus contatos</a>
 
-    <div class="app-card">
-      <h1 class="app-card-title"><%= contato._id ? 'Editar contato' : 'Novo contato' %></h1>
-      <p class="app-muted mb-4">Nome é obrigatório. Informe também e-mail ou telefone.</p>
+    <div class="app-panel">
+      <div class="d-flex align-items-center gap-3 mb-4">
+        <% if (contato._id) { %>
+          <span class="app-avatar app-avatar-lg cor-<%= contato.nome.charCodeAt(0) % 6 %>"><%= contato.nome.charAt(0).toUpperCase() %></span>
+        <% } else { %>
+          <span class="app-avatar app-avatar-lg cor-0">+</span>
+        <% } %>
+        <div>
+          <h1 class="app-panel-title mb-1"><%= contato._id ? 'Editar contato' : 'Novo contato' %></h1>
+          <p class="app-muted mb-0">Nome é obrigatório. Informe também um e-mail ou telefone.</p>
+        </div>
+      </div>
 
       <form action="<%= contato._id ? `/contato/edit/${contato._id}` : '/contato/register' %>" method="POST" class="form-contato" novalidate>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
@@ -32,7 +41,7 @@
 
         <div class="mb-4">
           <label for="telefone" class="form-label">Telefone</label>
-          <input type="text" id="telefone" name="telefone" class="form-control" value="<%= contato.telefone %>">
+          <input type="tel" id="telefone" name="telefone" class="form-control" value="<%= contato.telefone %>">
         </div>
 
         <button type="submit" class="btn btn-accent w-100">
